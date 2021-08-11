@@ -35,7 +35,7 @@ else
 fi
 
 #restart the services
-docker stop `docker ps -aq -f name=sartun_*`
-docker rm `docker ps -aq -f name=sartun_*`
+docker stop `docker ps -aq -f name="sartun_*"`
+docker rm `docker ps -aq -f name="sartun_*"`
 docker network prune -f
 docker-compose -p "sartun" up -d

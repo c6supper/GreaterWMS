@@ -10,7 +10,7 @@ COPY ./version $SARTUN_DIR/version
 COPY ./docker-entrypoint.sh /sartun/docker-entrypoint.sh
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
-    apk add --update bc grep bash gettext git gcc musl-dev postgresql-dev postgresql-libs && \
+    apk add --update bc grep bash gettext git gcc musl-dev postgresql-dev postgresql-libs libffi-dev && \
     apk add --virtual temppkg &&  \
     apk del temppkg && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/* /var/cache/distfiles/*
