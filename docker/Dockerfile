@@ -18,12 +18,14 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # Add configuration scripts
 
 # default configuration for istio
-ENV RUN_AFTER_SIDECAR yes
+ENV RUN_AFTER_SIDECAR no
+
+ENV SARTUN_PORT 8008
 
 # initilization for the first time
 ENTRYPOINT ["/sartun/docker-entrypoint.sh"]
 
-EXPOSE 8005/tcp
+EXPOSE 8008/tcp
 
 # CMD ["openvpn --cd $OPENVPN_DIR --config $OVPN_CONFIG 2>&1"]
-CMD ["/bin/bash"]
+CMD ["daphne -p $SARTUN_PORT greaterwms.asgi:application"]
