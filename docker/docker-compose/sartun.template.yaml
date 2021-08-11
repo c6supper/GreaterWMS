@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: psotgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: root
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+      
+   sartun:
+      stdin_open: true
+      tty: true
+      command: [/bin/bash]
+      image: c6supper/sartun:${SARTUN_TAG}
+      container_name: sartun
+      cap_add:
+         - SYS_ADMIN 
+      network_mode: ${APP_NETWORK_MODE}
+      volumes:
+        - ${SARTUN_CODE_VOLUME}:${SARTUN_DIR}
+      restart: ${APP_RESTART_POLICY}
+      environment:
+         RUN_AFTER_SIDECAR: 'no'
+      logging:
+         driver: ${APP_LOGGING_DRIVER}
+         options:
+            max-size: ${APP_LOGGING_SIZE}
+            max-file: ${APP_LOGGING_NUMBER}
