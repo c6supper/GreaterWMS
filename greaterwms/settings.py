@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'greaterwms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'test',
         'USER': 'root',
         'PASSWORD': '123',
